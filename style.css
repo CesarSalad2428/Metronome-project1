@@ -1,0 +1,18 @@
+body{
+    background-image: url("IMG_5109.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+.btn {
+    font-size: 25px;
+    color: rgb(212, 31, 18);
+    border-radius: 25px;
+    border: 5px solid black;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.label {
+    font-size: 200px;
+}
