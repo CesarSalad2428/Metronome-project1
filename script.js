@@ -27,7 +27,7 @@ const bpmInput = document.getElementById("bpm")
 slider.oninput = function () {
     bpmInput.value = this.value
     display.textContent = this.value;
-};
+}
 bpmInput. oninput = function () {
     slider.value = this.value;
     display.textContent = this.value;
