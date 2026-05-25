@@ -7,15 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <label for="bpm">(BPM):</label> 
-    <input id="bpm" type="number" value="60" min="1" max="300">
-
-    <button onclick="start()" class="btn">Start</button>
-    <button onclick="stop()" class="btn">End</button>
-
-    <input type="range" id="bpm-slider" min="1" max="300" value="60">
-    <span id="bpm-display">60</span>
+    <div class="container">
+        <div class="input-row">
+            <label for="bpm">(BPM):</label> 
+            <input id="bpm" type="number" value="60" min="1" max="300">
+        </div>
+        <div class="slider-row">
+            <input type="range" id="bpm-slider" min="1" max="200" value="60">
+            <span id="bpm-display">60</span>
+        </div>
+    
+        <div class="buttons">
+        <button onclick="start()" class="btn">Start</button>
+        <button onclick="stop()" class="btn">End</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
+    
+    
 </body>
 </html>
