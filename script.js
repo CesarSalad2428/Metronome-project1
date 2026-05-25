@@ -9,16 +9,28 @@ function click() {
 }
 
 function start() {
-    let bpm = Number(document.getElementById('bpm').value);
+    let bpm = Number(bpmInput.value);
     let intervalTime = 60000 / bpm;
 
     clearInterval(interval);
-    click(); // immediate beat (removes “first delay” feeling)
+    click(); 
     interval = setInterval(click, intervalTime);
 }
 
 function stop() {
     clearInterval(interval);
+}
+const slider = document.getElementById("bpm-slider");
+const display = document.getElementById("bpm-display");
+const bpmInput = document.getElementById("bpm")
+
+slider.oninput = function () {
+    bpmInput.value = this.value
+    display.textContent = this.value;
+}
+bpmInput. oninput = function () {
+    slider.value = this.value;
+    display.textContent = this.value;
 }
 
 

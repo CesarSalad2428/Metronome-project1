@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script src="script.js"></script>
     <label for="bpm">(BPM):</label> 
     <input id="bpm" type="number" value="60" min="1" max="300">
-    
+
     <button onclick="start()" class="btn">Start</button>
     <button onclick="stop()" class="btn">End</button>
+
+    <input type="range" id="bpm-slider" min="1" max="300" value="60">
+    <span id="bpm-display">60</span>
+
+    <script src="script.js"></script>
 </body>
 </html>
