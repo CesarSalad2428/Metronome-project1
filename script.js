@@ -1,24 +1,30 @@
 // ctrl + s = save file for program update
-let interval;
-
+let nextTick = 0; 
+let interval = 0; // ms between clicks
 const audio = new Audio("freesound_community-metronome-85688.mp3");
 
-function click() {
+function click() { 
     audio.currentTime = 0;
     audio.play();
 }
 
-function start() {
-    let bpm = Number(bpmInput.value);
-    let intervalTime = 60000 / bpm;
+function scheduler() {
+   const now = performance.now();
 
-    clearInterval(interval);
-    click(); 
-    interval = setInterval(click, intervalTime);
+    if (now >= nextTick) {
+        click()
+        nextTick += interval;
+    }
+    requestAnimationFrame(scheduler);
 }
-
+function start() {
+    const bpm = Number(bpmInput.value);
+    nextTick = performance.now();
+    interval = 60000 / bpm
+    scheduler();
+}
 function stop() {
-    clearInterval(interval);
+    nextTick = Infinity
 }
 const slider = document.getElementById("bpm-slider");
 const display = document.getElementById("bpm-display");
@@ -32,5 +38,3 @@ bpmInput. oninput = function () {
     slider.value = this.value;
     display.textContent = this.value;
 }
-
-
