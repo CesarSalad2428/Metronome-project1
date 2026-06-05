@@ -5,8 +5,10 @@ let nextNoteTime = 0;
 let bpm = 120;
 let isRunning = false;
 let clickBuffer = null;
-let subdivision = 1
-let beat = 0
+let subdivision = 1;
+let subCounter =0;
+let beat = 0;
+
 
 
 function playAccentClick(time) {
@@ -39,17 +41,23 @@ function scheduler() {
     if (!isRunning) return;
     
     while (nextNoteTime < audioCtx.currentTime + 0.1) {
-       if (beat === 0) {
+          if (subCounter === 0) {
+            playAccentClick(nextNoteTime);
+        } else {
+            playClick(nextNoteTime);
+        }
 
-        playAccentClick(nextNoteTime) //accent=beat 0\
-       } else {
-        playClick(nextNoteTime);
-       }
-        beat = (beat + 1) % subdivision;
+        // Move to next subdivision
+        subCounter++;
+
+        // If we've completed a full beat worth of subdivisions:
+        if (subCounter >= subdivision) {
+            subCounter = 0;          // reset for next beat
+            beat = (beat + 1) % 4;   // advance the BEAT
+        }
+
         nextNoteTime += (60 / bpm) / subdivision;
     }
-
-    
 
     setTimeout(scheduler, 25);
 }
@@ -73,8 +81,6 @@ function stop() {
 function eighthNoteInterval(bpm) {
     return (60 / bpm) / 2;
 }
-
-
 
 const slider = document.getElementById("bpm-slider");
 const display = document.getElementById("bpm-display");
