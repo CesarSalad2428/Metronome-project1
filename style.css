@@ -8,7 +8,7 @@ body{
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    height: 50vh;
     margin: 0;
 }
 .container {
@@ -44,3 +44,7 @@ body{
     padding: 8px 15px;
     border-radius: 150px;
 }
+.subdivisions {
+    color: aliceblue;
+}
+
