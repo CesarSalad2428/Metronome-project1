@@ -4,38 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metronome</title>
-    <header>
-        Met 1.4  
-    </header>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <header>
+        Met 1.5 
+    </header>
+
+    <div id="pulse"></div>
+
     <div class="container">
         <div class="input-row">
             <label for="bpm">(BPM):</label> 
             <input id="bpm" type="number" value="60" min="1" max="300">
         </div>
+
         <div class="slider-row">
             <input type="range" id="bpm-slider" min="1" max="200" value="60">
             <span id="bpm-display">60</span>
         </div>
-    
+
         <div class="buttons">
-        <button onclick="start()" class="btn">Start</button>
-        <button onclick="stop()" class="btn">End</button>
+            <button onclick="toggleMetronome()" class="btn">CLICK</button>
         </div>
+
         <div class="subdivisions">
-            <button onclick="subdivision = 1" class="btn">Quarter</button>
-            <button onclick="subdivision = 2" class="btn">Eighth</button>
-            <button onclick="subdivision = 3" class="btn">Triplet</button>
-            <button onclick="subdivision = 4" class="btn">Sixteenth</button>
+            <button onclick="subdivision = 1" class="sub-btn">
+                <img src="Quarter_note.png" alt="Quarter">
+            </button>
+
+            <button onclick="subdivision = 2" class="sub-btn">
+                <img src="Eighth_note.png" alt="Eighth">
+            </button>
+
+            <button onclick="subdivision = 3" class="sub-btn">
+                <img src="Triplet_note.png" alt="Triplet">
+            </button>
+
+            <button onclick="subdivision = 4" class="sub-btn">
+                <img src="Sixteenth_note.png" alt="Sixteenth">
+            </button>
         </div>
     </div> 
 
     <script src="script.js"></script>
-    
-    
 </body>
 </html>
-    
-    
