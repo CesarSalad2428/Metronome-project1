@@ -1,4 +1,3 @@
-// ctrl + s = save file for program update
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 let nextNoteTime = 0;
@@ -6,15 +5,13 @@ let bpm = 120;
 let isRunning = false;
 let clickBuffer = null;
 let subdivision = 1;
-let subCounter =0;
+let subCounter = 0;
 let beat = 0;
-
-
 
 function playAccentClick(time) {
     const source = audioCtx.createBufferSource();
     const gain = audioCtx.createGain();
-    gain.gain.value = 1.25; 
+    gain.gain.value = 1.5; 
 
     source.buffer = clickBuffer;
     source.connect(gain).connect(audioCtx.destination);
@@ -36,24 +33,22 @@ function playClick(time) {
     source.start(time);
 }
 
-
 function scheduler() {
     if (!isRunning) return;
     
     while (nextNoteTime < audioCtx.currentTime + 0.1) {
-          if (subCounter === 0) {
+
+        if (subCounter === 0 && beat === 0) {
             playAccentClick(nextNoteTime);
         } else {
             playClick(nextNoteTime);
         }
 
-        // Move to next subdivision
         subCounter++;
 
-        // If we've completed a full beat worth of subdivisions:
         if (subCounter >= subdivision) {
-            subCounter = 0;          // reset for next beat
-            beat = (beat + 1) % 4;   // advance the BEAT
+            subCounter = 0;
+            beat = (beat + 1) % 4;
         }
 
         nextNoteTime += (60 / bpm) / subdivision;
@@ -62,8 +57,18 @@ function scheduler() {
     setTimeout(scheduler, 25);
 }
 
-function start() {
-    if (isRunning) return;
+function stopMetronome() {
+    isRunning = false;
+
+    nextNoteTime = 0;
+    subCounter = 0;
+    beat = 0;
+}
+function toggleMetronome() {
+    if (isRunning) {
+        stopMetronome();
+        return;
+    } 
 
     bpm = Number(bpmInput.value);
     isRunning = true;
@@ -74,10 +79,6 @@ function start() {
     scheduler();
 }
 
-function stop() {
-    isRunning = false;
-    nextNoteTime = Infinity;
-}
 function eighthNoteInterval(bpm) {
     return (60 / bpm) / 2;
 }
@@ -95,3 +96,14 @@ bpmInput.oninput = function () {
     slider.value = this.value;
     display.textContent = this.value;
 };
+
+function setSubdivision(value, element) {
+    subdivision = value;
+
+    document.querySelectorAll('.sub-btn').forEach(btn => 
+        btn.classList.remove('active')
+    );
+
+    element.classList.add('active');
+}
+
