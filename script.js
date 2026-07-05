@@ -8,10 +8,20 @@ let subdivision = 1;
 let subCounter = 0;
 let beat = 0;
 
+const clickSound = document.getElementById("click-sound");
+
+document.querySelectorAll(".sub-btn").forEach(button => {
+    button.addEventListener("click", () => {
+        clickSound.currentTime = 0; 
+        clickSound.play();
+    });
+});
+
+
 function playAccentClick(time) {
     const source = audioCtx.createBufferSource();
     const gain = audioCtx.createGain();
-    gain.gain.value = 1.5; 
+    gain.gain.value = 1.65; 
 
     source.buffer = clickBuffer;
     source.connect(gain).connect(audioCtx.destination);
@@ -65,8 +75,13 @@ function stopMetronome() {
     beat = 0;
 }
 function toggleMetronome() {
+    const icon = document.getElementById("play-icon");
     if (isRunning) {
         stopMetronome();
+
+        icon.classList.remove("fa-pause");
+        icon.classList.add("fa-play");
+
         return;
     } 
 
@@ -77,6 +92,9 @@ function toggleMetronome() {
 
     nextNoteTime = audioCtx.currentTime;
     scheduler();
+
+    icon.classList.remove("fa-play");
+    icon.classList.add("fa-pause");
 }
 
 function eighthNoteInterval(bpm) {
@@ -96,6 +114,16 @@ bpmInput.oninput = function () {
     slider.value = this.value;
     display.textContent = this.value;
 };
+function changeBPM (amount) {
+    let currentBPM = Number(bpmInput.value);
+
+    currentBPM += amount;
+
+    bpm= currentBPM
+    bpmInput.value = currentBPM;
+    slider.value = currentBPM;
+    display.textContent = currentBPM;
+}
 
 function setSubdivision(value, element) {
     subdivision = value;
@@ -106,4 +134,43 @@ function setSubdivision(value, element) {
 
     element.classList.add('active');
 }
+let isPlaying = false;
 
+const toggleBtn = document.getElementById("toggle-rudiment");
+const rudimentSection = document.querySelector(".rudiment-stuff");
+
+toggleBtn.onclick = function () {
+    rudimentSection.classList.toggle("hidden");
+};
+
+const dropdownBtn = document.querySelector(".dropdown-btn");
+const dropdownMenu = document.querySelector(".dropdown-menu");
+const selected = document.getElementById("selected-rudiment");
+const items = document.querySelectorAll(".dropdown-item");
+
+dropdownBtn.onclick = function () {
+    dropdownMenu.classList.toggle("show");
+}
+
+// dropdown items
+items.forEach(item => {
+
+    item.onclick = function() {
+
+        selected.textContent = this.textContent;
+
+        dropdownMenu.classList.remove("show");
+
+    };
+
+});
+
+const arrow = document.querySelector(".dropdown-btn i");
+
+dropdownBtn.onclick = function () {
+
+    dropdownMenu.classList.toggle("show");
+
+    arrow.classList.toggle("rotate");
+
+}
