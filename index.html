@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metronome</title>
+    <header>
+        Big-Boom 1.8 
+    </header>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<button id="toggle-rudiment">
+Show Rudiment
+</button>
+<div class="rudiment-stuff hidden">
+    <div class="rudiment-section">
+
+        <div class="dropdown">
+
+            <div class="dropdown-btn">
+                <img src="icons/drum.svg" class="dropdown-icon" alt="">
+                <span id="selected-rudiment">
+                Select a Rudiment
+                </span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+
+            <div class="dropdown-menu">
+                <div class="dropdown-item" data-image="Single-Paradiddle.jpg">
+                Paradiddle
+                </div>
+
+                <div class="dropdown-item" data-image="Double_Paradiddle.jpg">
+                Double Paradiddle
+                </div>
+
+                <div class="dropdown-item" data-image="Triple-Paradiddle.jpg">
+                Triple Paradiddle
+                </div>
+
+                <div class="dropdown-item" data-image="Single_Paradiddle-diddle.jpg">
+                Single Paradiddle-Diddle
+                </div>
+
+                <div class="dropdown-item" data-image="Flam_Accent.jpg">
+                Flam Accent
+                </div>
+
+                <div class="dropdown-item" data-image="Flam_Tap.jpg">
+                Flam Tap
+                </div>
+
+                <div class="dropdown-item" data-image="Flamacue.jpg">
+                Flamacue
+                </div>
+
+                <div class="dropdown-item" data-image="Flam_Paradiddle.jpg">
+                Flam Paradiddle
+                </div>
+
+                <div class="dropdown-item" data-image="Flam_Paradiddle-diddle.jpg">
+                Flam Paradiddle-diddle
+                </div>
+
+                <div class="dropdown-item" data-image="Single_flammed_Mill.jpg">
+                Single Flammed Mill
+                </div>
+
+                <div class="dropdown-item" data-image="Pataflafla.jpg">
+                Pataflafla
+                </div>
+
+                <div class="dropdown-item" data-image="Swiss_Army_Triplet.jpg">
+                Swiss Army Triplet
+                </div>
+
+                <div class="dropdown-item" data-image="Inverted_Flam_Tap.jpg">
+                Inverted Flam Trap
+                </div>
+
+                <div class="dropdown-item" data-image="Drag.jpg">
+                Drag
+                </div>
+
+                <div class="dropdown-item" data-image="Flam_Drag.jpg">
+                Flam Drag
+                </div>
+
+                <div class="dropdown-item" data-image="Double_Drag_Tap.jpg">
+                Double Drag Tap
+                </div>
+
+                <div class="dropdown-item" data-image="Lesson_25.jpg">
+                Lesson 25
+                </div>
+
+                <div class="dropdown-item" data-image="Single_Dragadiddle.jpg">
+                Single Dragadiddle
+                </div>
+
+                <div class="dropdown-item" data-image="Drag_Paradiddle.jpg">
+                Drag Paradiddle
+                </div>
+
+                <div class="dropdown-item" data-image="Single_Ratamacue.jpg">
+                Single Ratamacue
+                </div>
+
+                <div class="dropdown-item" data-image="Double_Ratamacue.jpg">
+                Double Ratamacue
+                </div>
+
+            </div>
+
+        </div>
+        
+        <div class="rudiment-card hidden">
+            
+
+            <img
+                id="rudiment-image"
+                alt="">
+        </div>
+
+    </div>
+
+</div>
+
+    <div class="main-card">
+        <h3 class="card-title">BPM</h3>
+
+        <div class="input-row">
+            <input id="bpm" type="number" value="60" min="1" max="300" hidden>
+        </div>
+
+        <div class="bpm-controls">
+
+            <button class="bpm-btn" onclick="changeBPM(-1)">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+            <div class="bpm-counter">
+                <h1 id="bpm-display">60</h1>
+            </div>
+            <button class="bpm-btn" onclick="changeBPM(1)">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+        <div class="slider-row">
+            <input type="range" id="bpm-slider" min="1" max="200" value="60">
+        </div>
+        <div class="buttons">
+            <button onclick="toggleMetronome()" class="play-btn">
+                <i id="play-icon" class="fa-solid fa-play"></i>
+            </button>
+        </div>
+        <div class="subdivisions-section">
+        <h3 class="sub-title">Subdivisions</h3>
+            <div class="subdivisions">
+
+                <button onclick="subdivision = 1" class="sub-btn">
+                    <img src="subdivisions/Quarter_note.png" alt="Quarter">
+                <button onclick="subdivision = 2" class="sub-btn">
+                    <img src="subdivisions/Eighth_note.png" alt="Eighth">
+                </button>
+
+                <button onclick="subdivision = 3" class="sub-btn">
+                    <img src="subdivisions/Triplet_note.png" alt="Triplet">
+                </button>
+
+                <button onclick="subdivision = 4" class="sub-btn">
+                    <img src="subdivisions/Sixteenth_note.png" alt="Sixteenth">
+                </button>
+            </div>
+    </div>
+
+    <audio id="click-sound" src="Select.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
